@@ -39,21 +39,50 @@ p {
     color: #7f8c8d;
 }
 
+/* Input fields and labels styling */
+input, select {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
 /* Button styling */
 button {
     background-color: #3498db;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
 button:hover {
     background-color: #2980b9;
+}
+
+/* Result styling */
+#result {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#totalAmount {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: #27ae60;
 }
 
 /* Add responsiveness for smaller screens */
