@@ -4,12 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tip Suggester</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Tip Suggester</h1>
-    <p>Click the button below to calculate a suggested tip based on your experience.</p>
-    <button onclick="alert(suggestTip())">Calculate Tip</button>
+    <div class="container">
+        <h1>Tip Suggester</h1>
+        <p>Enter the total bill amount and provide feedback to get a suggested tip.</p>
+
+        <label for="billAmount">Total Bill Amount:</label>
+        <input type="number" id="billAmount" placeholder="Enter bill amount" required><br><br>
+
+        <label for="experience">Rate your overall experience:</label>
+        <select id="experience">
+            <option value="poor">Poor</option>
+            <option value="average">Average</option>
+            <option value="excellent">Excellent</option>
+        </select><br><br>
+
+        <label for="friendliness">How friendly was the server?</label>
+        <select id="friendliness">
+            <option value="not friendly">Not Friendly</option>
+            <option value="neutral">Neutral</option>
+            <option value="very friendly">Very Friendly</option>
+        </select><br><br>
+
+        <label for="speed">How fast was the service?</label>
+        <select id="speed">
+            <option value="slow">Slow</option>
+            <option value="average">Average</option>
+            <option value="fast">Fast</option>
+        </select><br><br>
+
+        <label for="foodQuality">How was the food quality?</label>
+        <select id="foodQuality">
+            <option value="bad">Bad</option>
+            <option value="okay">Okay</option>
+            <option value="great">Great</option>
+        </select><br><br>
+
+        <button onclick="calculateTip()">Calculate Tip</button>
+
+        <h3 id="result"></h3>
+        <p id="totalAmount"></p>
+    </div>
     <script src="tip-suggester.js"></script>
-    <link rel="stylesheet" href="style.css">
 </body>
 </html>
