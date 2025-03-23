@@ -1,115 +1,120 @@
-/* style.css */
-
-/* Global styles */
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4; /* Uber Eats background color */
-    color: #333; /* Dark text for readability */
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Header styling */
-h1 {
-    color: #18C27E; /* Uber Eats green */
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 20px;
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-/* Card styles */
 .card {
     background-color: #fff;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    padding: 30px;
-}
-
-.card h1, .card h3 {
-    font-family: 'Arial', sans-serif;
-    color: #18C27E;
-}
-
-/* Button styling */
-button {
-    background-color: #18C27E; /* Uber Eats green */
-    color: white;
-    font-weight: bold;
-    border: none;
+    padding: 20px;
     border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 16px;
     width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card.dark-mode {
+    background-color: #333;
+    color: #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    text-align: center;
+    color: #0066cc;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+input, select, button {
+    width: 100%;
+}
+
+input:focus, select:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
+}
+
+button {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #16b570; /* Darker green on hover */
+    background-color: #004d99;
 }
 
-/* Modal Styling */
-.modal-content {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+button.dark-mode {
+    background-color: #444;
+    color: #fff;
 }
 
-.modal-header {
-    background-color: #18C27E;
+button.dark-mode:hover {
+    background-color: #555;
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    margin-top: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#darkModeToggle i {
+    margin-right: 8px;
+}
+
+/* Share Button */
+#shareButton {
+    background-color: #17a2b8;
     color: white;
-    border-radius: 10px 10px 0 0;
+    margin-top: 20px;
 }
 
-.modal-header h5 {
-    font-weight: bold;
-}
-
-.modal-footer {
-    border-top: 1px solid #eee;
-}
-
-/* Input Fields */
-input[type="number"], select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-input[type="number"]:focus, select:focus {
-    border-color: #18C27E; /* Green focus color */
-    outline: none;
+#shareButton i {
+    margin-right: 8px;
 }
 
 /* Result Section */
 #result {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #result h3 {
-    color: #18C27E;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #28a745;
 }
 
-#tipAmount, #totalAmount {
-    font-size: 24px;
-    font-weight: bold;
-    color: #18C27E;
+#result p {
+    text-align: center;
+    font-size: 1.2rem;
 }
 
-/* Additional styles for responsiveness */
-@media (max-width: 576px) {
-    .card {
-        padding: 15px;
-    }
-    
-    button {
-        font-size: 14px;
-    }
+/* Icon input styling */
+.input-group-text {
+    background-color: #f4f4f4;
 }

@@ -1,69 +1,111 @@
-function calculateTip() {
-    // Get user input from the modal form
-    let amount = parseFloat(document.getElementById('billAmount').value);
-    if (isNaN(amount) || amount <= 0) {
-        alert("Please enter a valid bill amount.");
+// Dark Mode Toggle Functionality
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+const card = document.querySelector('.card');
+
+// Toggle dark mode
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    card.classList.toggle('dark-mode');
+    darkModeToggle.classList.toggle('dark-mode');
+
+    // Update the button text and icon
+    if (body.classList.contains('dark-mode')) {
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    } else {
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    }
+});
+
+// Handle the form submission and tip calculation
+const form = document.getElementById('tipForm');
+const resultDiv = document.getElementById('result');
+const tipPercentageSpan = document.getElementById('tipPercentage');
+const tipAmountSpan = document.getElementById('tipAmount');
+const totalAmountSpan = document.getElementById('totalAmount');
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const billAmount = parseFloat(document.getElementById('billAmount').value);
+    const experience = document.getElementById('experience').value;
+    const friendliness = document.getElementById('friendliness').value;
+    const speed = document.getElementById('speed').value;
+    const foodQuality = document.getElementById('foodQuality').value;
+
+    if (isNaN(billAmount) || billAmount <= 0) {
+        alert('Please enter a valid bill amount');
         return;
     }
 
-    let experience = document.getElementById('experience').value;
-    let friendliness = document.getElementById('friendliness').value;
-    let speed = document.getElementById('serviceSpeed').value;
-    let foodQuality = document.getElementById('foodQuality').value;
-
     let minTip = 10, maxTip = 20;
-
-    // Calculate min and max tip based on user experience
+    
     switch (experience) {
-        case "poor":
+        case 'poor':
             maxTip = 12;
             break;
-        case "average":
+        case 'average':
             minTip = 12;
             maxTip = 18;
             break;
-        case "excellent":
+        case 'excellent':
             minTip = 18;
             break;
     }
-
-    // Adjust tip based on friendliness
-    if (friendliness === "veryFriendly") {
+    
+    if (friendliness === 'very friendly') {
         minTip += 2;
         maxTip += 2;
-    } else if (friendliness === "notFriendly") {
+    } else if (friendliness === 'not friendly') {
         maxTip -= 2;
     }
 
-    // Adjust tip based on service speed
-    if (speed === "fast") {
+    if (speed === 'fast') {
         minTip += 1;
         maxTip += 1;
-    } else if (speed === "slow") {
+    } else if (speed === 'slow') {
         maxTip -= 1;
     }
 
-    // Adjust tip based on food quality
-    if (foodQuality === "great") {
+    if (foodQuality === 'great') {
         minTip += 2;
         maxTip += 2;
-    } else if (foodQuality === "bad") {
+    } else if (foodQuality === 'bad') {
         maxTip -= 2;
     }
 
-    // Generate random tip percentage
+    // Calculate random tip percentage within the range
     let tipPercentage = Math.random() * (maxTip - minTip) + minTip;
-    let tipAmount = (amount * tipPercentage) / 100;
-
-    // Calculate total amount after adding the tip
-    let totalAmount = amount + tipAmount;
+    let tipAmount = (billAmount * tipPercentage) / 100;
+    let totalAmount = billAmount + tipAmount;
 
     // Show the result
-    document.getElementById('tipAmount').innerHTML = `$${tipAmount.toFixed(2)} (${tipPercentage.toFixed(2)}%)`;
-    document.getElementById('totalAmount').innerHTML = `$${totalAmount.toFixed(2)}`;
+    tipPercentageSpan.textContent = tipPercentage.toFixed(2);
+    tipAmountSpan.textContent = tipAmount.toFixed(2);
+    totalAmountSpan.textContent = totalAmount.toFixed(2);
 
-    // Show result section and hide modal form
-    document.getElementById('result').classList.remove('d-none');
-    document.getElementById('tipModal').classList.remove('show');
-    document.getElementById('tipModal').style.display = 'none';
-}
+    resultDiv.style.display = 'block';
+});
+
+// Share Tip Button functionality
+document.getElementById('shareButton').addEventListener('click', function () {
+    const tipPercentage = tipPercentageSpan.textContent;
+    const tipAmount = tipAmountSpan.textContent;
+    const totalAmount = totalAmountSpan.textContent;
+
+    const shareText = `I got a tip suggestion of ${tipPercentage}%! That's $${tipAmount}. My total amount is $${totalAmount}.`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Tip Suggester',
+            text: shareText,
+            url: window.location.href
+        }).then(() => {
+            console.log('Shared successfully');
+        }).catch((error) => {
+            console.error('Error sharing:', error);
+        });
+    } else {
+        alert('Share functionality is not supported on this device.');
+    }
+});
