@@ -1,98 +1,115 @@
-/* Reset default browser styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* style.css */
 
-/* Set up a clean, readable font */
+/* Global styles */
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Styling for the main container */
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4; /* Uber Eats background color */
+    color: #333; /* Dark text for readability */
 }
 
 /* Header styling */
 h1 {
-    font-size: 2rem;
+    color: #18C27E; /* Uber Eats green */
+    font-weight: 700;
+    text-align: center;
     margin-bottom: 20px;
-    color: #2c3e50;
 }
 
-/* Paragraph styling */
-p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    color: #7f8c8d;
+/* Card styles */
+.card {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 30px;
 }
 
-/* Input fields and labels styling */
-input, select {
-    padding: 8px;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-label {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    display: block;
+.card h1, .card h3 {
+    font-family: 'Arial', sans-serif;
+    color: #18C27E;
 }
 
 /* Button styling */
 button {
-    background-color: #3498db;
+    background-color: #18C27E; /* Uber Eats green */
     color: white;
+    font-weight: bold;
     border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    width: 100%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #16b570; /* Darker green on hover */
 }
 
-/* Result styling */
-#result {
-    font-size: 1.2rem;
-    margin-top: 20px;
+/* Modal Styling */
+.modal-content {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #18C27E;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-header h5 {
     font-weight: bold;
-    color: #2c3e50;
 }
 
-#totalAmount {
-    font-size: 1.1rem;
-    margin-top: 10px;
-    color: #27ae60;
+.modal-footer {
+    border-top: 1px solid #eee;
 }
 
-/* Add responsiveness for smaller screens */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.5rem;
+/* Input Fields */
+input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: #18C27E; /* Green focus color */
+    outline: none;
+}
+
+/* Result Section */
+#result {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#result h3 {
+    color: #18C27E;
+}
+
+#tipAmount, #totalAmount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #18C27E;
+}
+
+/* Additional styles for responsiveness */
+@media (max-width: 576px) {
+    .card {
+        padding: 15px;
     }
-
+    
     button {
-        width: 100%;
-        padding: 12px;
+        font-size: 14px;
     }
 }
