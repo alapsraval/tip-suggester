@@ -1,16 +1,20 @@
-function suggestTip() {
-    let amount = parseFloat(prompt("Enter the total bill amount: "));
+function calculateTip() {
+    // Get the total bill amount
+    let amount = parseFloat(document.getElementById("billAmount").value);
     if (isNaN(amount) || amount <= 0) {
-        return "Please enter a valid bill amount.";
+        alert("Please enter a valid bill amount.");
+        return;
     }
 
-    let experience = prompt("Rate your experience (Poor, Average, Excellent): ").toLowerCase();
-    let friendliness = prompt("How friendly was the server? (Not Friendly, Neutral, Very Friendly): ").toLowerCase();
-    let speed = prompt("How fast was the service? (Slow, Average, Fast): ").toLowerCase();
-    let foodQuality = prompt("How was the food quality? (Bad, Okay, Great): ").toLowerCase();
+    // Get user feedback from the dropdown options
+    let experience = document.getElementById("experience").value;
+    let friendliness = document.getElementById("friendliness").value;
+    let speed = document.getElementById("speed").value;
+    let foodQuality = document.getElementById("foodQuality").value;
 
     let minTip = 10, maxTip = 20;
 
+    // Calculate min and max tip based on user experience
     switch (experience) {
         case "poor":
             maxTip = 12;
@@ -22,10 +26,9 @@ function suggestTip() {
         case "excellent":
             minTip = 18;
             break;
-        default:
-            return "Invalid experience rating. Choose 'Poor', 'Average', or 'Excellent'.";
     }
 
+    // Adjust tip based on friendliness
     if (friendliness === "very friendly") {
         minTip += 2;
         maxTip += 2;
@@ -33,6 +36,7 @@ function suggestTip() {
         maxTip -= 2;
     }
 
+    // Adjust tip based on service speed
     if (speed === "fast") {
         minTip += 1;
         maxTip += 1;
@@ -40,6 +44,7 @@ function suggestTip() {
         maxTip -= 1;
     }
 
+    // Adjust tip based on food quality
     if (foodQuality === "great") {
         minTip += 2;
         maxTip += 2;
@@ -47,7 +52,14 @@ function suggestTip() {
         maxTip -= 2;
     }
 
+    // Generate random tip percentage
     let tipPercentage = Math.random() * (maxTip - minTip) + minTip;
     let tipAmount = (amount * tipPercentage) / 100;
-    return `Based on your experience rating, friendliness, service speed, and food quality, a ${tipPercentage.toFixed(2)}% tip would be $${tipAmount.toFixed(2)}.`;
+
+    // Calculate total amount after adding the tip
+    let totalAmount = amount + tipAmount;
+
+    // Display the results
+    document.getElementById("result").innerText = `Suggested Tip: ${tipPercentage.toFixed(2)}% ($${tipAmount.toFixed(2)})`;
+    document.getElementById("totalAmount").innerText = `Total Amount (Including Tip): $${totalAmount.toFixed(2)}`;
 }
