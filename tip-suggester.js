@@ -89,6 +89,10 @@ form.addEventListener('submit', function (event) {
 
     // Calculate random tip percentage within the range
     let tipPercentage = Math.random() * (maxTip - minTip) + minTip;
+
+    // Ensure tip percentage stays within the desired range (5% to 15%)
+    tipPercentage = Math.max(Math.min(tipPercentage, 15), 5);
+
     let tipAmount = (billAmount * tipPercentage) / 100;
     let totalAmount = billAmount + tipAmount;
 
