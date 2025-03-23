@@ -38,41 +38,54 @@ form.addEventListener('submit', function (event) {
         return;
     }
 
-    let minTip = 10, maxTip = 20;
-    
+    let minTip = 5, maxTip = 15;
+
+    // Refined Experience Logic
     switch (experience) {
         case 'poor':
-            maxTip = 12;
+            minTip = 5;
+            maxTip = 7;
             break;
         case 'average':
-            minTip = 12;
-            maxTip = 18;
+            minTip = 7;
+            maxTip = 10;
             break;
         case 'excellent':
-            minTip = 18;
+            minTip = 10;
+            maxTip = 15;
             break;
     }
-    
-    if (friendliness === 'very friendly') {
+
+    // Refined Friendliness Logic
+    if (friendliness === 'not friendly') {
+        minTip -= 1;
+        maxTip -= 1;
+    } else if (friendliness === 'very friendly') {
         minTip += 2;
         maxTip += 2;
-    } else if (friendliness === 'not friendly') {
-        maxTip -= 2;
     }
 
-    if (speed === 'fast') {
+    // Refined Speed Logic
+    if (speed === 'slow') {
+        minTip -= 1;
+        maxTip -= 1;
+    } else if (speed === 'fast') {
         minTip += 1;
         maxTip += 1;
-    } else if (speed === 'slow') {
-        maxTip -= 1;
     }
 
-    if (foodQuality === 'great') {
+    // Refined Food Quality Logic
+    if (foodQuality === 'bad') {
+        minTip -= 2;
+        maxTip -= 2;
+    } else if (foodQuality === 'great') {
         minTip += 2;
         maxTip += 2;
-    } else if (foodQuality === 'bad') {
-        maxTip -= 2;
     }
+
+    // Ensure tip percentage stays within 5% to 15% range
+    minTip = Math.max(minTip, 5);  // Minimum 5% tip
+    maxTip = Math.min(maxTip, 15); // Maximum 15% tip
 
     // Calculate random tip percentage within the range
     let tipPercentage = Math.random() * (maxTip - minTip) + minTip;
