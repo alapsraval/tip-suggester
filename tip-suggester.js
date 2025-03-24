@@ -1,128 +1,87 @@
-// Dark Mode Toggle Functionality
+// Dark Mode toggle functionality
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
-const card = document.querySelector('.card');
 
-// Toggle dark mode
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
-    card.classList.toggle('dark-mode');
-    darkModeToggle.classList.toggle('dark-mode');
-
-    // Update the button text and icon
-    if (body.classList.contains('dark-mode')) {
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-    } else {
-        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-    }
+    const isDarkMode = body.classList.contains('dark-mode');
+    darkModeToggle.innerHTML = isDarkMode
+        ? '<span class="moon"><i class="fas fa-sun"></i></span> Light Mode'
+        : '<span class="moon"><i class="fas fa-moon"></i></span> Dark Mode';
 });
 
-// Handle the form submission and tip calculation
-const form = document.getElementById('tipForm');
-const resultDiv = document.getElementById('result');
-const tipPercentageSpan = document.getElementById('tipPercentage');
-const tipAmountSpan = document.getElementById('tipAmount');
-const totalAmountSpan = document.getElementById('totalAmount');
+// Enable or disable the Calculate button based on input values
+const billAmountInput = document.getElementById('billAmount');
+const calculateButton = document.getElementById('calculateButton');
 
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    
-    const billAmount = parseFloat(document.getElementById('billAmount').value);
+billAmountInput.addEventListener('input', () => {
+    calculateButton.disabled = !billAmountInput.value;
+});
+
+// Calculate the tip based on user input
+calculateButton.addEventListener('click', () => {
+    const amount = parseFloat(billAmountInput.value);
     const experience = document.getElementById('experience').value;
     const friendliness = document.getElementById('friendliness').value;
     const speed = document.getElementById('speed').value;
     const foodQuality = document.getElementById('foodQuality').value;
 
-    if (isNaN(billAmount) || billAmount <= 0) {
-        alert('Please enter a valid bill amount');
-        return;
-    }
+    let minTip = 5, maxTip = 15; // Base tip range
 
-    let minTip = 5, maxTip = 15;
-
-    // Refined Experience Logic
+    // Adjust the min and max tip based on experience rating
     switch (experience) {
-        case 'poor':
-            minTip = 5;
+        case "poor":
             maxTip = 7;
             break;
-        case 'average':
+        case "average":
             minTip = 7;
-            maxTip = 10;
+            maxTip = 12;
             break;
-        case 'excellent':
-            minTip = 10;
-            maxTip = 15;
+        case "excellent":
+            minTip = 12;
             break;
     }
 
-    // Refined Friendliness Logic
-    if (friendliness === 'not friendly') {
-        minTip -= 1;
-        maxTip -= 1;
-    } else if (friendliness === 'very friendly') {
+    // Modify the tip range based on friendliness
+    if (friendliness === "very friendly") {
         minTip += 2;
         maxTip += 2;
+    } else if (friendliness === "not friendly") {
+        maxTip -= 2;
     }
 
-    // Refined Speed Logic
-    if (speed === 'slow') {
-        minTip -= 1;
-        maxTip -= 1;
-    } else if (speed === 'fast') {
+    // Modify the tip range based on service speed
+    if (speed === "fast") {
         minTip += 1;
         maxTip += 1;
+    } else if (speed === "slow") {
+        maxTip -= 1;
     }
 
-    // Refined Food Quality Logic
-    if (foodQuality === 'bad') {
-        minTip -= 2;
-        maxTip -= 2;
-    } else if (foodQuality === 'great') {
+    // Modify the tip range based on food quality
+    if (foodQuality === "great") {
         minTip += 2;
         maxTip += 2;
+    } else if (foodQuality === "bad") {
+        maxTip -= 2;
     }
 
-    // Ensure tip percentage stays within 5% to 15% range
-    minTip = Math.max(minTip, 5);  // Minimum 5% tip
-    maxTip = Math.min(maxTip, 15); // Maximum 15% tip
-
-    // Calculate random tip percentage within the range
+    // Generate a random tip percentage within the specified range
     let tipPercentage = Math.random() * (maxTip - minTip) + minTip;
+    tipPercentage = Math.min(Math.max(tipPercentage, 5), 15); // Clamp between 5% and 15%
 
-    // Ensure tip percentage stays within the desired range (5% to 15%)
-    tipPercentage = Math.max(Math.min(tipPercentage, 15), 5);
+    // Calculate the tip amount
+    let tipAmount = (amount * tipPercentage) / 100;
+    let totalAmount = amount + tipAmount;
 
-    let tipAmount = (billAmount * tipPercentage) / 100;
-    let totalAmount = billAmount + tipAmount;
+    // Round up the total amount to the next cent
+    // const totalAmount = Math.round(totalAmount);
 
-    // Show the result
-    tipPercentageSpan.textContent = tipPercentage.toFixed(2);
-    tipAmountSpan.textContent = tipAmount.toFixed(2);
-    totalAmountSpan.textContent = totalAmount.toFixed(2);
+    // Adjust the tip amount to match the rounded total
+    // tipAmount = roundedTotalAmount - amount;  // Subtract the bill amount from the rounded total to get the adjusted tip
+    // tipPercentage = (tipAmount * 100) / totalAmount;  // Subtract the bill amount from the rounded total to get the adjusted tip
 
-    resultDiv.style.display = 'block';
-});
-
-// Share Tip Button functionality
-document.getElementById('shareButton').addEventListener('click', function () {
-    const tipPercentage = tipPercentageSpan.textContent;
-    const tipAmount = tipAmountSpan.textContent;
-    const totalAmount = totalAmountSpan.textContent;
-
-    const shareText = `I got a tip suggestion of ${tipPercentage}%! That's $${tipAmount}. My total amount is $${totalAmount}.`;
-
-    if (navigator.share) {
-        navigator.share({
-            title: 'Tip Suggester',
-            text: shareText,
-            url: window.location.href
-        }).then(() => {
-            console.log('Shared successfully');
-        }).catch((error) => {
-            console.error('Error sharing:', error);
-        });
-    } else {
-        alert('Share functionality is not supported on this device.');
-    }
+    // Display the result
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `Suggested tip: <strong>$${tipAmount.toFixed(2)}</strong> (<strong>${tipPercentage.toFixed(2)}%</strong>) <br> Total amount: <strong class="total-amount">$${totalAmount.toFixed(2)}</strong>`;
 });

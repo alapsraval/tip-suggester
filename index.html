@@ -3,94 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tip Suggester</title>
-    <!-- Font Awesome CDN for Icons -->
+    <!-- Bootstrap CDN (with integrity fixed) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJxjR7nLTVC7D93RfMxWlx0ewpbqK9UQ9lH4XzU32e6E1xuNiY0T2Hkd2VrV" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Styles -->
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container mt-5">
+    <div class="container">
         <div class="card">
-            <h1>Tip Suggester</h1>
-            <p class="lead text-center">Get a recommended tip based on your experience!</p>
+            <h2>TipMate</h2>
+            <h3>Your friendly tipping assistant</h3>
+            <form>
+                <div class="mb-3">
+                    <label for="billAmount" class="form-label">Enter the total bill amount</label>
+                    <input type="number" id="billAmount" class="form-control" placeholder="Enter amount" required>
+                </div>
 
-            <!-- Form for input -->
-            <form id="tipForm">
-                <!-- Input fields with icons -->
                 <div class="mb-3">
-                    <label for="billAmount" class="form-label">Enter the Total Bill Amount:</label>
-                    <input type="number" class="form-control" id="billAmount" required>
+                    <label for="experience" class="form-label">Rate your experience</label>
+                    <select id="experience" class="form-select" required>
+                        <option value="poor">Poor</option>
+                        <option value="average">Average</option>
+                        <option value="excellent">Excellent</option>
+                    </select>
                 </div>
-                <div class="mb-3">
-                    <label for="experience" class="form-label">Rate your experience:</label>
-                    <div class="input-group">
-                        <i class="fas fa-smile input-group-text"></i>
-                        <select class="form-select" id="experience" required>
-                            <option value="">Choose...</option>
-                            <option value="poor">Poor</option>
-                            <option value="average">Average</option>
-                            <option value="excellent">Excellent</option>
-                        </select>
-                    </div>
-                </div>
+
                 <div class="mb-3">
                     <label for="friendliness" class="form-label">How friendly was the server?</label>
-                    <select class="form-select" id="friendliness" required>
-                        <option value="">Choose...</option>
+                    <select id="friendliness" class="form-select" required>
                         <option value="not friendly">Not Friendly</option>
                         <option value="neutral">Neutral</option>
                         <option value="very friendly">Very Friendly</option>
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="speed" class="form-label">How fast was the service?</label>
-                    <select class="form-select" id="speed" required>
-                        <option value="">Choose...</option>
+                    <select id="speed" class="form-select" required>
                         <option value="slow">Slow</option>
                         <option value="average">Average</option>
                         <option value="fast">Fast</option>
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="foodQuality" class="form-label">How was the food quality?</label>
-                    <select class="form-select" id="foodQuality" required>
-                        <option value="">Choose...</option>
+                    <select id="foodQuality" class="form-select" required>
                         <option value="bad">Bad</option>
                         <option value="okay">Okay</option>
                         <option value="great">Great</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Get Tip Suggestion</button>
+
+                <button type="button" class="btn btn-primary" id="calculateButton" disabled>Calculate Tip</button>
             </form>
 
-            <!-- Result Section -->
-            <div id="result" class="mt-4" style="display: none;">
-                <h3>Your Suggested Tip</h3>
-                <p><strong>Tip Percentage:</strong> <span id="tipPercentage"></span>%</p>
-                <p><strong>Tip Amount:</strong> $<span id="tipAmount"></span></p>
-                <p><strong>Total Amount:</strong> $<span id="totalAmount"></span></p>
+            <div id="result" class="result"></div>
 
-                <!-- Share Button -->
-                <button id="shareButton" class="btn btn-info w-100 mt-3">
-                    <i class="fas fa-share-alt"></i> Share Your Tip
-                </button>
-            </div>
-
-            <!-- Dark Mode Toggle -->
-            <button id="darkModeToggle" class="btn btn-light mt-3">
-                <i class="fas fa-moon"></i> Dark Mode
+            <button id="darkModeToggle" class="btn btn-custom">
+                <span class="moon"><i class="fas fa-moon"></i></span> Dark Mode
             </button>
         </div>
     </div>
 
-    <!-- Bootstrap JS and Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <!-- Custom JS -->
+    <!-- Bootstrap JS (for button and other functionalities) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="tip-suggester.js"></script>
 </body>
 </html>

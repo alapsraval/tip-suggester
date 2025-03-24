@@ -1,120 +1,168 @@
-/* General Styles */
+/* General Body Styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f7f7f7;
     color: #333;
     margin: 0;
     padding: 0;
+}
+
+/* Center content */
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-
+/* Card Styling */
 .card {
     background-color: #fff;
-    padding: 20px;
     border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
     width: 100%;
-    max-width: 500px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
 }
 
-.card.dark-mode {
-    background-color: #333;
-    color: #e0e0e0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-h1 {
-    text-align: center;
-    color: #0066cc;
-}
-
-form {
-    margin-top: 20px;
-}
-
-.form-label {
+/* Heading Styling */
+h1,h2,h3 {
     font-weight: bold;
+    color: #444;
+    text-align: center;
 }
 
-input, select, button {
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Element Styling */
+form label {
+    font-weight: 500;
+    color: #333;
+}
+
+input, select {
+    font-size: 1rem;
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Button Styling */
+button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.8rem;
+    margin-top: 1rem;
     width: 100%;
 }
 
-input:focus, select:focus {
-    border-color: #0066cc;
-    box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
-}
-
-button {
+.btn-primary {
     background-color: #0066cc;
+    border-color: #005bb5;
     color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-button:hover {
-    background-color: #004d99;
+.btn-primary:hover {
+    background-color: #005bb5;
+    border-color: #004c99;
 }
 
-button.dark-mode {
-    background-color: #444;
+/* Result Styling */
+.result {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 1rem;
+}
+
+/* Dark Mode Specific Styles */
+.dark-mode body {
+    background-color: #121212;
     color: #fff;
 }
 
-button.dark-mode:hover {
-    background-color: #555;
+.dark-mode .card,.dark-mode form label,.dark-mode h2, .dark-mode h3  {
+    background-color: #1e1e1e;
+    color: #fff;
 }
 
-/* Dark Mode Toggle Button */
+.dark-mode .btn-primary {
+    background-color: #0077b3;
+    border-color: #005c8e;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #005c8e;
+    border-color: #004c72;
+}
+
+/* Dark Mode Toggle Button Styling */
 #darkModeToggle {
-    margin-top: 15px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-#darkModeToggle i {
-    margin-right: 8px;
-}
-
-/* Share Button */
-#shareButton {
-    background-color: #17a2b8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #222;
+    border: none;
     color: white;
+    padding: 10px 15px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.moon {
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+/* Smooth Transitions for Dark Mode */
+body, .card, .btn, .btn-primary, .btn-dark {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Uber Eats-like Button and Input Styling */
+.btn-custom {
+    background-color: #3a3a3a;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 100%;
     margin-top: 20px;
 }
 
-#shareButton i {
-    margin-right: 8px;
+.btn-custom:hover {
+    background-color: #5a5a5a;
 }
 
-/* Result Section */
+/* Result Styling */
 #result {
-    margin-top: 30px;
-}
-
-#result h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #28a745;
-}
-
-#result p {
-    text-align: center;
     font-size: 1.2rem;
+    font-weight: 600;
+    color: #28a745;
+    margin-top: 20px;
+    text-align: center;
 }
 
-/* Icon input styling */
-.input-group-text {
-    background-color: #f4f4f4;
+/* Tooltip for total amount */
+#result .total-amount {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #0066cc;
 }
