@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 80vh;
 }
 
 /* Card Styling */
@@ -40,7 +40,8 @@ h2 {
 h3 {
     font-size: 1rem;
     color: #666;
-    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
 }
 
 /* Form Element Styling */
@@ -56,6 +57,7 @@ input, select {
     margin-bottom: 1rem;
     border-radius: 4px;
     border: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 /* Button Styling */
@@ -108,6 +110,16 @@ button {
     border-color: #004c72;
 }
 
+.dark-mode .btn-custom{
+    color: #222;
+    background-color: white;
+}
+
+.dark-mode .btn-custom:hover{
+    color: #111;
+    background-color: #999;
+}
+
 /* Dark Mode Toggle Button Styling */
 #darkModeToggle {
     display: flex;
@@ -115,9 +127,7 @@ button {
     align-items: center;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: #222;
     border: none;
-    color: white;
     padding: 10px 15px;
     width: 100%;
     margin-top: 20px;
@@ -165,4 +175,35 @@ body, .card, .btn, .btn-primary, .btn-dark {
     font-weight: bold;
     font-size: 1.5rem;
     color: #0066cc;
+}
+
+/* ...existing code... */
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    input, select, button {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    #darkModeToggle {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
 }
